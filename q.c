@@ -61,6 +61,10 @@ task_t * queue_pop(queue_t * queue)  {
 	return task;
 }
 
+void* worker(void *arg){
+	int * i =arg;
+  	printf("%d\n",*i);
+}
 
 int main(int argc, char *argv[])  {
 
@@ -72,7 +76,12 @@ int main(int argc, char *argv[])  {
 	};
 	queue_push(&queue,&task);
 	task_t * new_task;                                             
-        new_task = queue_pop(&queue);                                   
+        new_task = queue_pop(&queue);  
+        int ncpu=(long)sysconf(_SC_NPROCESSORS_ONLN);
+	for(int i=0;i<100;++i){
+  	phtread_t id;
+  	pthread_create(&id,null,worker,&i);
+	} 
         printf("%s\n", new_task->pswd);    
 	return 0;                            
 }
