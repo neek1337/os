@@ -80,7 +80,7 @@ int main(int argc, char *argv[])  {
         int ncpu=(long)sysconf(_SC_NPROCESSORS_ONLN);
 	for(int i=0;i<100;++i){
   	phtread_t id;
-  	pthread_create(&id,null,worker,&i);
+  	pthread_create(&id,null,worker(&i),&i);
 	} 
         printf("%s\n", new_task->pswd);    
 	return 0;                            
